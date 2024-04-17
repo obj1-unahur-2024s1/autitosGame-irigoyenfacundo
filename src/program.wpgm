@@ -1,0 +1,27 @@
+import wollok.game.*
+import auto.*
+import pared.*
+
+program miPrimerWollokGame {
+	
+	game.title("Cars")
+	// límites del tablero de juego
+	game.width(14)
+	game.height(8)
+	
+	// fondo del tablero de juego
+	game.boardGround("empedrado.jpg")
+	
+	// agregamos a nuestro objeto auto
+	game.addVisualCharacter(auto)
+	game.addVisual(pared)
+	game.onTick(1000, "movimiento", {pared.movete()})
+	
+	game.whenCollideDo(pared, { elemento => auto.restart()
+		game.say(auto, auto.textoChoque())
+	})
+	
+	// que arranque el juego!
+	game.start()
+}
+
